@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<style>
+
+#loading{
+
+	display:none;
+}
+table {
+    border-collapse: collapse;
+}
+</style>
+</head>
+<form id="foo" method="post">
+  Input your query:<br>
+  <input type="text" id="que" name="query" required><br><br>
+ <!--  Is this:<br>
+  <input type="radio" name="opt" value="author" checked> Author<br>
+  <input type="radio" name="opt" value="title"> Title<br>
+  <input type="radio" name="opt" value="other"> Other<br><br> -->
+  	Results to Display:<br>
+   <input type="text" name="num" id="num" style="width:40px;" required><br><br>
+  
+ 
+
+</form>
+
+<script>
+
+$(document).ready(function() {
+	
+          $("#driver").click(function(event){
+				var query = document.getElementById('que').value;
+				var num = document.getElementById('num').value;
+				 $('#loading').show();
+             $.post( 
+                "get_book.php",
+                { 
+                	query: query,
+                	num: num
+
+                 },
+                function(data) {
+                	 $('#loading').hide();
+                   $('#stage').html(data);
+                }
+             );
+			
+          });
+		
+       });
+</script>
+<input type = "button" id = "driver" value="SUBMIT"><br>
+
+<div id="loading">
+  <img src="loading.gif" /> 
+</div>
+  
+  <div id = "stage" style = "background-color:cc0;">
+        
+      </div>
+          
+ 
+</html>
